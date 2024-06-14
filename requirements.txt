@@ -1,0 +1,8 @@
+Scrapy
+django
+dateparser
+django-csp
+django_ckeditor_5
+python-dotenv
+django-minify-html  
+django-ckeditor

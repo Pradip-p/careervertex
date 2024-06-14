@@ -1,0 +1,115 @@
+{% load static %}
+{% load job_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta name="google-site-verification" content="3u5CQt2z54LM7a-WrgewNG6it5CUbfFgi2uSjeKQ2oQ" />
+  <meta name="google-adsense-account" content="ca-pub-2021823000621310">
+  <script  >   
+    setTimeout(function() {
+    var headID = document.getElementsByTagName("head")[0];         
+    var newScript = document.createElement('script');
+    newScript.type = 'text/javascript';
+    newScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2021823000621310';
+    headID.appendChild(newScript);
+  }, 3000);
+  </script>
+  <link rel="preconnect" href="https://www.careervertex.com">
+  <link rel="dns-prefetch" href="//www.pradipthapa.info.np">
+  <link rel="alternate" hreflang="en" href="https://www.careervertex.com/" >
+  <link rel="alternate" media="only screen and (max-width: 640px)" href="https://www.careervertex.com/mobile/" >
+  <link rel="alternate" media="only screen and (min-width: 641px)" href="https://www.careervertex.com/desktop/" >
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{%  static 'favicon-32x32.png' %}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static  'apple-touch-icon.png' %}">
+  <link rel="icon" sizes="192x192" href="{% static  'android-chrome-192x192.png' %}">
+  <link rel="icon" sizes="512x512" href="{% static  'android-chrome-512x512.png' %}">
+  <link rel="manifest" href="{% static 'manifest.json' %}">
+  <!-- Theme Color -->
+  <meta content='#ffffff' name='theme-color'/>
+  <meta content='#ffffff' name='msapplication-TileColor'/>
+  <meta content='#ffffff' name='msapplication-navbutton-color'/>
+  <meta content='#ffffff' name='apple-mobile-web-app-status-bar-style'/>
+  <meta content='yes' name='apple-mobile-web-app-capable'/>
+  <meta name="robots" content="index, follow">
+  <meta name="rating" content="general">
+  <!-- Primary Meta Tag -->
+  <link rel="canonical" href="{{ request.build_absolute_uri }}">
+  {% block headblock %}
+  {% endblock %}
+  <!-- Feed links -->
+  <link rel="alternate" type="application/atom+xml" title="Career Links Nepal - Atom" href="{{ request.scheme }}://{{ request.get_host }}{% url 'atom_feed' %}" />
+  <link rel="alternate" type="application/rss+xml" title="Career Links Nepal - RSS" href="{{ request.scheme }}://{{ request.get_host }}{% url 'rss_feed' %}" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'css/optimized.css' %}"  rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}"  rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}"  rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}"  rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}"  rel="stylesheet">
+  <!-- Template Main CSS Files -->
+  <link href="{% static  'assets/css/variables.css' %}" rel="stylesheet">
+  <link href="{% static  'assets/css/main.css' %}" rel="stylesheet">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NRCW3KTFMQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-NRCW3KTFMQ');
+  </script>
+</head>
+<body>  
+<!-- ======= Header ======= -->
+<header id="header" class="header d-flex align-items-center fixed-top">
+  <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+    <a href="/" class="logo d-flex align-items-center">
+      <h1>Career Vertex Nepal</h1>
+    </a>
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="{% url 'about_us' %}" aria-label="about us page">About</a></li>
+        {% get_categories as categories %}
+          {% for cate in categories %}
+          <li><a href="{% url 'category-detail' slug=cate.slug %}">{{ cate }}</a></li>
+          {% endfor %}
+        <li><a href="{% url 'contact_us' %}">Contact</a></li>
+      </ul>
+    </nav><!-- .navbar -->
+    <div class="position-relative">
+      <a href="#" class="mx-2 js-search-open" aria-label="Open search"><span class="bi-search" aria-hidden="true"></span></a>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+      <!-- ======= Search Form ======= -->
+      <form class="search-form-wrap js-search-form-wrap" action="{% url 'job_search' %}" method="GET">
+        <div class="search-form">
+            <span class="icon bi-search"></span>
+            <input type="text" name="q" placeholder="Search" class="form-control">
+            <button type="submit" class="btn js-search-close"><span class="bi-x"></span></button>
+        </div>
+    </form><!-- End Search Form -->
+    </div>
+  </div>
+</header>
+<!-- End Header -->
+    {% block content %}
+    {% endblock %}
+  <!-- ======= Footer ======= -->
+  {% include "job/footer.html" %}
+  <a href="#"   aria-label="page scroll" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}" defer></script>
+  <script src="{% static  'assets/vendor/glightbox/js/glightbox.min.js' %}" defer ></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}" defer ></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}" defer></script>
+  <script src="{% static 'assets/js/main.js' %}" defer ></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+{% load static %}
+{% load job_tags %}
+<footer id="footer" class="footer">
+    <div class="footer-content">
+      <div class="container">
+        <div class="row g-5">
+          <div class="col-lg-4">
+            <h1 class="footer-heading">About Career Links Nepal</h1>
+            <p>
+            Career Links Nepal is a Nepali website offering  , jobs, and job opportunities in fields such as NGOs/INGOs, banking, and technology etc. We will continue to share informative content on this platform.
+          </p>
+          </div>
+          <div class="col-6 col-lg-2">
+            <h1 class="footer-heading">Navigation</h1>
+            <ul class="footer-links list-unstyled">
+              <li><a href="/"><i class="bi bi-chevron-right"></i> Home</a></li>
+              <li><a href="{% url 'about_us' %}"><i class="bi bi-chevron-right"></i> About us</a></li>
+              <li><a href="{% url 'contact_us' %}"><i class="bi bi-chevron-right"></i> Contact</a></li>
+              <li><a href="{% url 'privacy_policy' %}"><i class="bi bi-chevron-right"></i> Privacy Policy</a></li>
+              <li><a href="{% url 'terms' %}"><i class="bi bi-chevron-right"></i> Terms and Conditions</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-lg-2">
+            <h1 class="footer-heading">Categories</h1>
+            <ul class="footer-links list-unstyled">
+              {% get_categories as categories %}
+              {% for cate in categories %}
+                <li><a href="{% url 'category-detail' slug=cate.slug %}"><i class="bi bi-chevron-right"></i> {{ cate }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="col-lg-4">
+            <h1 class="footer-heading">Recent Posts</h1>
+            <ul class="footer-links footer-job-entry list-unstyled">
+              {% get_recent_jobs as jobs %}
+              {% for job in jobs %}
+              <li>
+                <a href="{{ job.get_absolute_url}}" aria-label="job detail" class="d-flex align-items-center">
+                  <div>
+                    <div class="post-meta d-block"><span class="date">{{job.category}}</span></div>
+                    <span>{{ job.title }}</span>
+                  </div>
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+            <div class="copyright">
+              © Copyright <strong><span>Career Links Nepal</span></strong>. All Rights Reserved
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="social-links mb-3 mb-lg-0 text-center text-md-end">
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>

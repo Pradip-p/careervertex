@@ -1,0 +1,34 @@
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    # Redirect requests to IP address to your domain
+    return 301 http://pradipthapa.info.np$request_uri;
+}
+
+server {
+    listen 80;
+    server_name pradipthapa.info.np www.pradipthapa.info.np;
+
+    # Your existing configuration...
+    location = /favicon.ico {
+        access_log off;
+        alias /root/PradipBlog/;
+        log_not_found off;
+    }
+
+    location /static/ {
+        alias /root/PradipBlog/staticfiles/;
+        expires 7d;
+        add_header Cache-Control "public";
+    }
+
+    location /media/ {
+        root /root/PradipBlog;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/run/gunicorn.sock;
+    }
+}
