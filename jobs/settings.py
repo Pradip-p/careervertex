@@ -136,7 +136,6 @@ USE_TZ = True
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # STATIC_ROOT = os.path.join(PROJECT_ROOT, "staticfiles")
-# ALLOWED_HOSTS = ['django-portal.herokuapp.com', 'localhost', 'jobs.manjurulhoque.com', '127.0.0.1', 'localhost:3000']
 # cors config
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -146,6 +145,8 @@ else:
     ALLOWED_HOSTS = ["www.careervertex.com","careervertex.com"]
 
 CORS_ALLOW_METHODS = ("DELETE", "GET", "OPTIONS", "PATCH", "POST", "PUT")
+
+CSRF_TRUSTED_ORIGINS = ['https://www.careervertex.com']
 
 CORS_ALLOW_HEADERS = (
     "accept",
