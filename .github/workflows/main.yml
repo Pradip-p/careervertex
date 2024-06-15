@@ -21,4 +21,4 @@ jobs:
           script: |
             cd /root/careervertex
             git pull origin version
-            docker compose up -d
+            docker-compose -f docker-compose.prod.yml up --build -d
