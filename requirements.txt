@@ -61,7 +61,6 @@ pre-commit==2.13.0
 progress==1.5
 promise==2.3
 prometheus-client==0.14.1
-psycopg2-binary==2.8.6
 pycparser==2.20
 Pygments==2.7.1
 PyJWT==2.3.0
@@ -93,3 +92,4 @@ urllib3==1.25.8
 virtualenv==20.4.7
 webencodings==0.5.1
 whitenoise==5.0.1
+psycopg2-binary==2.9.6
