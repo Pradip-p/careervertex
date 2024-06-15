@@ -21,9 +21,4 @@ ENV DEBUG=1
 RUN mkdir $APP_HOME/staticfiles
 RUN mkdir $APP_HOME/mediafiles
 
-# Collect static files
-RUN python manage.py makemigrations jobsapp resume_cv accounts tags oauth2_provider
-RUN python manage.py migrate
-RUN python manage.py collectstatic --noinput
-
 CMD ["sh", "entrypoint.sh"]
