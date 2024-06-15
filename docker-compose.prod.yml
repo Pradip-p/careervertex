@@ -20,6 +20,8 @@ services:
     ports:
       - "80:80"
     volumes:
+      - /etc/ssl/key.pem:/etc/ssl/key.pem:ro
+      - /etc/ssl/cert.pem:/etc/ssl/cert.pem:ro 
       - static_volume:/usr/src/app/staticfiles
       - media_volume:/usr/src/app/mediafiles
     depends_on:
