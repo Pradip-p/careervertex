@@ -11,7 +11,6 @@ services:
     volumes:
       - static_volume:/usr/src/app/staticfiles
       - media_volume:/usr/src/app/mediafiles
-    #    env_file: .env
     command: gunicorn jobs.wsgi:application --bind 0.0.0.0:8000
 
   nginx:
@@ -19,6 +18,7 @@ services:
     build: ./deployment/nginx/
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - /etc/ssl/key.pem:/etc/ssl/key.pem:ro
       - /etc/ssl/cert.pem:/etc/ssl/cert.pem:ro 
