@@ -12,7 +12,6 @@ python manage.py collectstatic --noinput
 
 # Apply database migrations
 python manage.py makemigrations jobsapp resume_cv accounts tags oauth2_provider
-python manage.py migrate
 echo "PostgreSQL is up and running!"
 # Continue with your Django application startup command
 exec "$@"
