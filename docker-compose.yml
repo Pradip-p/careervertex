@@ -5,12 +5,8 @@ services:
     restart: always
     build: .
     command: ./entrypoint.sh
-    environment:
-      - POSTGRES_DB=careerdb3
-      - POSTGRES_USER=career
-      - POSTGRES_PASSWORD=career
-      - POSTGRES_HOST=db
-      - POSTGRES_PORT=5432
+    env_file:
+      - env.txt
     volumes:
       - .:/app
       - static_volume:/usr/src/app/jobs/staticfiles
@@ -21,10 +17,8 @@ services:
   db:
     image: postgres:13
     restart: always
-    environment:
-      POSTGRES_DB: careerdb3
-      POSTGRES_USER: career
-      POSTGRES_PASSWORD: career
+    env_file:
+      - pg_env.txt
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
