@@ -6,8 +6,8 @@ services:
     build: .
     command: ./entrypoint.sh
     environment:
-      - POSTGRES_DB=mydatabase
-      - POSTGRES_USER=myuser
+      - POSTGRES_DB=careerdb3
+      - POSTGRES_USER=career
       - POSTGRES_PASSWORD=career
       - POSTGRES_HOST=db
       - POSTGRES_PORT=5432
@@ -22,8 +22,8 @@ services:
     image: postgres:13
     restart: always
     environment:
-      POSTGRES_DB: mydatabase
-      POSTGRES_USER: myuser
+      POSTGRES_DB: careerdb3
+      POSTGRES_USER: career
       POSTGRES_PASSWORD: career
     volumes:
       - postgres_data:/var/lib/postgresql/data
