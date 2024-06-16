@@ -54,5 +54,5 @@ volumes:
   postgres_data:
 
 networks:
-  backend:
+  career_vertex:
     driver: bridge
