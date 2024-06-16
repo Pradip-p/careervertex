@@ -92,4 +92,4 @@ urllib3==1.25.8
 virtualenv==20.4.7
 webencodings==0.5.1
 whitenoise==5.0.1
-psycopg2-binary==2.9.6
+psycopg2-binary==2.9.9

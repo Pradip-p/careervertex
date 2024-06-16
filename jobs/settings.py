@@ -88,11 +88,11 @@ WSGI_APPLICATION = "jobs.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('POSTGRES_DB'),
-        'USER': env('POSTGRES_USER'),
-        'PASSWORD': env('POSTGRES_PASSWORD'),
-        'HOST': env('POSTGRES_HOST').strip(),
-        'PORT': env('POSTGRES_PORT'),
+        'NAME': env('POSTGRES_DB',None),
+        'USER': env('POSTGRES_USER',None),
+        'PASSWORD': env('POSTGRES_PASSWORD',None),
+        'HOST': env('POSTGRES_HOST',None).strip(),
+        'PORT': env('POSTGRES_PORT',None),
     }
 }
 # DATABASES = {

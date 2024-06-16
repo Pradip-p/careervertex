@@ -11,8 +11,6 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    networks:
-      - djangonetwork
 
   web:
     build:
@@ -30,8 +28,6 @@ services:
     depends_on:
       - db
     command: gunicorn jobs.wsgi:application --bind 0.0.0.0:8000
-    networks:
-      - djangonetwork
 
   nginx:
     build: ./deployment/nginx/
@@ -47,14 +43,8 @@ services:
       - media_volume:/usr/src/app/mediafiles
     depends_on:
       - web
-    networks:
-      - djangonetwork
 
 volumes:
+  postgres_data:
   static_volume:
   media_volume:
-  postgres_data:
-
-networks:
-  djangonetwork:
-    driver: bridge
