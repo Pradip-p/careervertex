@@ -1,0 +1,49 @@
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name careervertex.com;
+    return 301 https://www.careervertex.com$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name careervertex.com;
+
+    ssl_certificate /etc/ssl/cert.pem;
+    ssl_certificate_key /etc/ssl/key.pem;
+
+    return 301 https://www.careervertex.com$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+   
+    server_name www.careervertex.com;
+
+    ssl_certificate /etc/ssl/cert.pem;
+    ssl_certificate_key /etc/ssl/key.pem;
+
+    location /favicon.ico {
+        alias /root/careervertex/;
+        log_not_found off;
+    }
+
+    location /static/ {
+        alias /root/careervertex/staticfiles/;
+        expires 7d;
+        add_header Cache-Control "public";
+    }
+
+    location /media/ {
+        root /root/careervertex;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/run/gunicorn.sock;
+    }
+}
+

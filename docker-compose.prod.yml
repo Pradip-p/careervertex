@@ -1,0 +1,58 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:13
+    container_name: db
+    restart: always
+    env_file:
+      - pg_env.txt
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data\
+    # networks:
+    #   - career_vertex
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: web
+    restart: always
+    env_file:
+      - env.txt
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - static_volume:/usr/src/app/staticfiles
+      - media_volume:/usr/src/app/mediafiles
+    # networks:
+    #   - career_vertex
+    depends_on:
+      - db
+    command: gunicorn jobs.wsgi:application --bind 0.0.0.0:8000
+
+  nginx:
+    build: ./deployment/nginx/
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/ssl/key.pem:/etc/ssl/key.pem:ro
+      - /etc/ssl/cert.pem:/etc/ssl/cert.pem:ro
+      - static_volume:/usr/src/app/staticfiles
+      - media_volume:/usr/src/app/mediafiles
+    depends_on:
+      - web
+
+volumes:
+  static_volume:
+  media_volume:
+  postgres_data:
+
+# networks:
+#   career_vertex:
+#     driver: bridge
