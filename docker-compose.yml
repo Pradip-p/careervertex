@@ -5,23 +5,12 @@ services:
     restart: always
     build: .
     command: ./entrypoint.sh
-    env_file:
-      - env.txt
     volumes:
       - .:/app
+      - .db_data/db.sqlite3:/db.sqlite3
       - static_volume:/usr/src/app/jobs/staticfiles
     ports:
       - "8000:8000"
-    depends_on:
-      - db
-  db:
-    image: postgres:13
-    restart: always
-    env_file:
-      - pg_env.txt
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
 
 volumes:
   static_volume:
-  postgres_data:
