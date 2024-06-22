@@ -6,6 +6,8 @@ while ! nc -z $POSTGRES_HOST $POSTGRES_PORT; do
 done
 
 echo "PostgreSQL is up and running!"
-
+python manage.py collectstatic --noinput
+python manage.py makemigrations jobsapp resume_cv accounts tags oauth2_provider
+python manage.py migrate
 # Continue with your Django application startup command
 exec "$@"

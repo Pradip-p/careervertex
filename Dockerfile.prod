@@ -30,11 +30,5 @@ RUN cp .env.dev.sample .env
 # Expose port
 EXPOSE 8000
 
-# Collect static files
-RUN python manage.py collectstatic --noinput --settings=jobs.settings
-
-# Apply database migrations
-RUN python manage.py migrate --settings=jobs.settings
-
 # Run entrypoint script
 CMD ["sh", "entrypoint.prod.sh"]
