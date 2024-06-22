@@ -12,6 +12,8 @@ WORKDIR /usr/src/app
 RUN apt-get update \
     && apt-get -y install nano \
     && apt-get clean
+# Install PostgreSQL client
+RUN apt-get install -y postgresql-client
 
 RUN python -m pip install --upgrade "pip==23.0.1"
 # Install Python dependencies
