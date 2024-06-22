@@ -1,24 +1,39 @@
+# Use an official Python runtime as a parent image
 FROM python:3.8-buster
 
-WORKDIR /usr/src/app
-
+# Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-COPY requirements.txt /usr/src/app
+# Set work directory
+WORKDIR /usr/src/app
 
-RUN python -m pip install --upgrade pip
+# Install system dependencies
+RUN apt-get update \
+    && apt-get -y install nano \
+    && apt-get clean
+
+# Install specific pip version
+RUN python -m pip install --upgrade "pip==23.0.1"
+
+# Install Python dependencies
+COPY requirements.txt /usr/src/app/
 RUN pip install -r requirements.txt
 
-COPY . /usr/src/app
-
+# Copy project files
+COPY . /usr/src/app/
+ENV DEBUG=1
+# Copy sample environment file
 RUN cp .env.dev.sample .env
 
-RUN chmod +x entrypoint.sh
+# Expose port
+EXPOSE 8000
 
-ENV APP_HOME=/usr/src/app
-ENV DEBUG=1
-RUN mkdir $APP_HOME/staticfiles
-RUN mkdir $APP_HOME/mediafiles
+# Collect static files
+RUN python manage.py collectstatic --noinput
 
+# Apply database migrations
+RUN python manage.py makemigrations jobsapp resume_cv accounts tags oauth2_provider --settings=jobs.settings
+
+# Run entrypoint script
 CMD ["sh", "entrypoint.sh"]

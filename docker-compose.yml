@@ -1,16 +1,42 @@
 version: '3'
 
 services:
-  web:
+  db:
+    image: postgres:13
+    container_name: db
     restart: always
-    build: .
-    command: ./entrypoint.sh
+    env_file:
+      - pg_env.txt
+    ports:
+      - "5433:5432"
     volumes:
-      - .:/app
-      - .db_data/db.sqlite3:/db.sqlite3
-      - static_volume:/usr/src/app/jobs/staticfiles
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - career_vertex
+  web:
+    build:
+      context: .
+    container_name: web
+    restart: always
+    env_file:
+      - env.txt
     ports:
       - "8000:8000"
+    volumes:
+      - .:/app
+      - static_volume:/usr/src/app/staticfiles
+      - media_volume:/usr/src/app/mediafiles
+    networks:
+      - career_vertex
+    depends_on:
+      - db
+    #command: gunicorn jobs.wsgi:application --bind 0.0.0.0:8000
 
 volumes:
   static_volume:
+  media_volume:
+  postgres_data:
+
+networks:
+  career_vertex:
+    driver: bridge

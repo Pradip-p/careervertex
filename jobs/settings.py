@@ -84,30 +84,17 @@ WSGI_APPLICATION = "jobs.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-if DEBUG:
-    DATABASES = {
-    "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": os.path.join(BASE_DIR, "db.sqlite3")},
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'ghuyhfun',
-    #     'USER': 'ghuyhfun',
-    #     'PASSWORD': 'ZMp3Pi11S9RJ7DVmovpo2aPo3rYiWlm3',
-    #     'HOST': 'baasu.db.elephantsql.com',
-    #     'PORT': '5432',
-    # }
-}
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ.get('POSTGRES_DB','postgres'),
-            'USER': os.environ.get('POSTGRES_USER','postgres'),
-            'PASSWORD': os.environ.get('POSTGRES_PASSWORD','postgres'),
-            'HOST': os.environ.get('POSTGRES_HOST','localhost'),
-            'PORT': os.environ.get('POSTGRES_PORT','5432'),
-        }
-    }
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('POSTGRES_DB','postgres'),
+        'USER': os.environ.get('POSTGRES_USER','postgres'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD','postgres'),
+        'HOST': os.environ.get('POSTGRES_HOST','localhost'),
+        'PORT': os.environ.get('POSTGRES_PORT','5432'),
+    }
+}
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
