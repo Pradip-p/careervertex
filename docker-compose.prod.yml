@@ -11,8 +11,7 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    # networks:
-    #   - career_vertex
+
   web:
     build:
       context: .
@@ -27,11 +26,9 @@ services:
       - .:/app
       - static_volume:/usr/src/app/staticfiles
       - media_volume:/usr/src/app/mediafiles
-    # networks:
-    #   - career_vertex
     depends_on:
       - db
-    command: gunicorn jobs.wsgi:application --bind 0.0.0.0:8000
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn jobs.wsgi:application --bind 0.0.0.0:8000"
 
   nginx:
     build: ./deployment/nginx/
@@ -52,7 +49,3 @@ volumes:
   static_volume:
   media_volume:
   postgres_data:
-
-# networks:
-#   career_vertex:
-#     driver: bridge

@@ -11,11 +11,12 @@ WORKDIR /usr/src/app
 # Install system dependencies
 RUN apt-get update \
     && apt-get -y install nano \
-    && apt-get clean
-# Install PostgreSQL client
-RUN apt-get install -y postgresql-client
+    && apt-get clean \
+    && apt-get install -y postgresql-client
 
+# Upgrade pip
 RUN python -m pip install --upgrade "pip==23.0.1"
+
 # Install Python dependencies
 COPY requirements.txt /usr/src/app/
 RUN pip install -r requirements.txt
@@ -28,9 +29,12 @@ RUN cp .env.dev.sample .env
 
 # Expose port
 EXPOSE 8000
+
 # Collect static files
-RUN python manage.py collectstatic --noinput
+RUN python manage.py collectstatic --noinput --settings=jobs.settings
+
 # Apply database migrations
-RUN python manage.py makemigrations jobsapp resume_cv accounts tags oauth2_provider --settings=jobs.settings
+RUN python manage.py migrate --settings=jobs.settings
+
 # Run entrypoint script
 CMD ["sh", "entrypoint.prod.sh"]

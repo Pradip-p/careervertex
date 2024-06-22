@@ -13,6 +13,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - career_vertex
+
   web:
     build:
       context: .
@@ -24,13 +25,14 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
-      - static_volume:/usr/src/app/staticfiles
-      - media_volume:/usr/src/app/mediafiles
+      - static_volume:/app/staticfiles
+      - media_volume:/app/mediafiles
     networks:
       - career_vertex
     depends_on:
       - db
-    #command: gunicorn jobs.wsgi:application --bind 0.0.0.0:8000
+    working_dir: /app
+    #command: ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && gunicorn jobs.wsgi:application --bind 0.0.0.0:8000"]
 
 volumes:
   static_volume:

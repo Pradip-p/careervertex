@@ -19,7 +19,7 @@ class Job(models.Model):
     category = models.CharField(max_length=100)
     last_date = models.DateTimeField()
     company_name = models.CharField(max_length=100)
-    company_description = models.CharField(max_length=300)
+    company_description = models.TextField()
     website = models.CharField(max_length=100, default="")
     created_at = models.DateTimeField(default=timezone.now)
     filled = models.BooleanField(default=False)

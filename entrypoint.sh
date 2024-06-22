@@ -1,11 +1,12 @@
 #!/bin/bash
 
 # Run database migrations
-python manage.py makemigrations jobsapp resume_cv accounts tags oauth2_provider
-python manage.py migrate
+
 
 # Collect static files
 python manage.py collectstatic --noinput
+python manage.py makemigrations jobsapp resume_cv accounts tags oauth2_provider
+python manage.py migrate
 
 # Check if DEBUG is set to 1, then run the development server
 if [ "$DEBUG" = "1" ]; then
