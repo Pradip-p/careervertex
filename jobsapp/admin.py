@@ -10,6 +10,7 @@ from jobsapp.models import Job
 class JobAdmin(admin.ModelAdmin):
     list_display = [
         "title",
+        "slug",
         "salary",
         "location",
         "type",

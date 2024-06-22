@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-
+from django_extensions.db.fields import AutoSlugField
 from accounts.models import User
 from tags.models import Tag
 
@@ -26,6 +26,8 @@ class Job(models.Model):
     salary = models.IntegerField(default=0, blank=True)
     tags = models.ManyToManyField(Tag)
     vacancy = models.IntegerField(default=1)
+    slug = AutoSlugField('slug', max_length=50, unique=True, populate_from=('title','location','created_at'))
+
 
     objects = JobManager()
 
