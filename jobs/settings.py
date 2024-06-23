@@ -120,7 +120,7 @@ LANGUAGE_CODE = "en"
 
 LANGUAGES = (("en", _("English")),)
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Kathmandu"
 
 USE_I18N = True
 

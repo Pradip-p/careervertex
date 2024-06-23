@@ -20,7 +20,7 @@ class LinkedinSpider(Spider):
         }
     } 
     def start_requests(self):
-        for page in range(1,2):
+        for page in range(1,20):
             url = f'https://www.jobsnepal.com/category/ngo-ingo-jobs?page={page}'
             yield Request(url,callback=self.parse, dont_filter=True)
 
@@ -50,7 +50,7 @@ class LinkedinSpider(Spider):
             'company_name': company_name,
             'content': content,
             'scrape_link': response.url,
-            'company_description':company_description,
+            'company_description': ''.join(company_description),
             'location': location,
             'last_date':apply_deadline,
             'type': employment_type

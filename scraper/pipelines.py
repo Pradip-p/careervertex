@@ -9,6 +9,9 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 django.setup()
 from jobsapp.models import Job, Tag
 from accounts.models import User
+from datetime import datetime
+from dateutil import parser
+import dateparser
 
 class jobPipeline(object):
 
@@ -28,23 +31,47 @@ class jobPipeline(object):
         if existing_job:
             print(f"Job with key {hashed_key} already exists in the database. Skipping...")
         else:
+            # Create the Job object
             category_name = 'Ngo/Ingo jobs'  # Default category name
-            tag = Tag.objects.latest()
-            user = User.objects.latest()
-            # category, created = Category.objects.get_or_create(name=category_name)
-            Job.objects.create(
-                uuid=item['jobkey'],
-                title=item['job_title'],
-                description = item['content'],
-                category=category_name,
-                # scrape_link = item['scrape_link'],
-                company_name = item['company_name'],
-                company_description=item['company_description'],
-                tag = tag,
-                user=user,
-                location = item['location'],
-                last_date = item['last_date'],
-                # type = 
-                type = "1"
-            )
-            print('Added to the Django SQLite database.........................')
+            tags = Tag.objects.all()
+            user = User.objects.order_by('-id').first()
+            print(user)
+            # Convert the string to a datetime object
+            last_date_str = item['last_date']
+            # Convert the string to a datetime object
+            try:
+                # Use dateparser to parse the datetime string
+                last_date = dateparser.parse(last_date_str)
+                if last_date:
+                    # Convert to a datetime object (if it's not already)
+                    if not isinstance(last_date, datetime):
+                        last_date = last_date.replace(tzinfo=None)
+            except Exception as e:
+                # Handle parsing errors
+                print(f"Error parsing last_date_str: {e}")
+                last_date = None  # or provide a default datetime value
+
+
+            if last_date:
+                job = Job.objects.create(
+                    uuid=item['jobkey'],
+                    title=item['job_title'],
+                    description=item['content'],
+                    category=category_name,
+                    # scrape_link=item['scrape_link'],
+                    company_name=item['company_name'],
+                    company_description=item['company_description'],
+                    location=item['location'],
+                    last_date = last_date,
+                    type="1",
+                    user = user
+                    
+                )
+
+                # Set the tags for the job using .set()
+                job.tags.set(tags)
+
+                # Set the user for the job
+                job.save()  # Save the job object after setting tags and user
+
+                print('Added to the Django SQLite database.........................')
