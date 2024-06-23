@@ -1,71 +1,114 @@
 
-## Django Job Portal
 
-#### An open source online job portal.
+```markdown
+# Career Vertex Nepal
 
+## Overview
 
-Used Tech Stack
+Career Vertex Nepal is an open source project designed to help users manage and explore career opportunities. This project utilizes Django for the backend, PostgreSQL for the database, and Docker for containerization.
 
-1. Django
-2. Sqlite
+## Tech Stack
 
+- **Django**: A high-level Python web framework that encourages rapid development and clean, pragmatic design.
+- **PostgreSQL**: A powerful, open source object-relational database system.
+- **Docker**: A set of platform as a service products that use OS-level virtualization to deliver software in packages called containers.
 
-<a name="local-venv"></a>
-### Local environment
+## Getting Started
 
-#### Install
+These instructions will help you set up and run the project on your local machine for development and testing purposes.
 
-1. Create a virtual environment
+### Prerequisites
 
-    `virtualenv venv`
+Make sure you have the following installed on your system:
 
-    Or
+- Docker: [Installation Guide](https://docs.docker.com/get-docker/)
+- Docker Compose: [Installation Guide](https://docs.docker.com/compose/install/)
 
-    `python3.8 -m venv venv`
+### Installation
 
-2. Activate it
+1. **Clone the repository:**
 
-    `source venv/bin/activate`
+   ```bash
+   git clone https://github.com/yourusername/career-vertex-nepal.git
+   cd career-vertex-nepal
+   ```
 
-3. Clone the repository and install the packages in the virtual env:
+2. **Build and run the Docker containers:**
 
-    `pip install -r requirements.txt`
+   ```bash
+   docker-compose up --build
+   ```
 
-4. Add `.env` file.
+3. **Access the application:**
 
-    `cp .env.dev.sample .env`
+   The application will be accessible at `http://localhost:8000`.
 
-5. Add Github client ID and client secret in the `.env` file
+## Contributing
 
-#### Run
+We welcome contributions to Career Vertex Nepal! Here’s how you can help:
 
-1.With the venv activate it, execute:
+### Reporting Bugs
 
-    python manage.py collectstatic
+If you find a bug, please report it by opening an issue on the [GitHub issues page](https://github.com/Pradip-p/careervertex/issues). Please include as much detail as possible.
 
-*Note* : Collect static is not necessary when debug is True (in dev mode)
+### Suggesting Features
 
-2. Create initial database:
+We’re always open to new ideas. If you have a feature request, please open an issue on the [GitHub issues page](https://github.com/Pradip-p/careervertex/issues).
 
-    `python manage.py migrate`
+### Making Changes
 
+1. **Fork the repository:**
 
-3. Load demo data (optional):
+   Click the "Fork" button on the top right of the repository page.
 
-    `python manage.py loaddata fixtures/app_name_initial_data.json --app app.model_name`
+2. **Clone your fork:**
 
-4. Run server:
+   ```bash
+   git clone https://github.com/yourusername/career-vertex-nepal.git
+   cd career-vertex-nepal
+   ```
 
-    `python manage.py runserver`
+3. **Create a branch for your feature or bug fix:**
 
-5. Default django admin credentials:
+   ```bash
+   git checkout -b feature-or-bugfix-name
+   ```
 
-    `email: admin@admin.com`
-    `password: admin`
+4. **Make your changes:**
 
-#### Run test:
-``python manage.py test``
+   Implement your feature or bug fix.
 
-#### To dump data:
-``python manage.py dumpdata --format=json --indent 4 app_name > app_name/fixtures/app_name_initial_data.json``
+5. **Commit your changes:**
+
+   ```bash
+   git add .
+   git commit -m "Description of the feature or bug fix"
+   ```
+
+6. **Push to your fork:**
+
+   ```bash
+   git push origin feature-or-bugfix-name
+   ```
+
+7. **Open a Pull Request:**
+
+   Go to the original repository and click the "New pull request" button. Select your branch from the list and submit your pull request for review.
+
+### Code of Conduct
+
+By participating in this project, you agree to abide by the [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For any questions or support, please open an issue on the [GitHub issues page](https://github.com/Pradip-p/careervertex/issues).
+
+---
+
+Happy coding!
+```
 
