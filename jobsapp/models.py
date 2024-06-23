@@ -3,12 +3,16 @@ from django.urls import reverse
 from django.utils import timezone
 from django_extensions.db.fields import AutoSlugField
 from accounts.models import User
-from tags.models import Tag
 
 from .manager import JobManager
 
 JOB_TYPE = (("1", "Full time"), ("2", "Part time"), ("3", "Internship"), ("4", "Contract"))
 
+class Tag(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
 
 class Job(models.Model):        
     uuid = models.CharField(max_length=50, null=True, blank=True, unique=True)

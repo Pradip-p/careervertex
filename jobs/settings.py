@@ -1,6 +1,4 @@
 import os
-import sys
-from datetime import timedelta
 
 import environ
 from django.urls import reverse_lazy
@@ -27,21 +25,12 @@ INSTALLED_APPS = [
     "django.contrib.flatpages",
     "django.contrib.staticfiles",
     "django.contrib.sitemaps",
-    "django_elasticsearch_dsl",
-    "drf_yasg",
-    "corsheaders",
-    "rest_framework",
-    "rest_framework.authtoken",
-    "rest_framework_simplejwt.token_blacklist",
     "jobsapp",
-    "resume_cv",
     "accounts",
-    "tags",
     "oauth2_provider",
     "social_django",
     "rest_framework_social_oauth2",
     "django.contrib.humanize",
-    "graphene_django",
 ]
 
 MIDDLEWARE = [
@@ -146,17 +135,7 @@ CORS_ALLOW_METHODS = ("DELETE", "GET", "OPTIONS", "PATCH", "POST", "PUT")
 
 CSRF_TRUSTED_ORIGINS = ['https://www.careervertex.com']
 
-CORS_ALLOW_HEADERS = (
-    "accept",
-    "accept-encoding",
-    "authorization",
-    "content-type",
-    "dnt",
-    "origin",
-    "user-agent",
-    "x-csrftoken",
-    "x-requested-with",
-)
+
 
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # for production
@@ -167,22 +146,6 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
 
 AUTH_USER_MODEL = "accounts.user"
-
-REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        # 'rest_framework.authentication.TokenAuthentication',
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ),
-    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
-    "EXCEPTION_HANDLER": "jobsapp.api.custom_exception.custom_exception_handler",
-}
-
-SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
-    "ROTATE_REFRESH_TOKENS": True,
-    "BLACKLIST_AFTER_ROTATION": True,
-}
 
 
 LOGGING = {
@@ -209,28 +172,7 @@ LOGGING = {
     },
 }
 
-ELASTIC_HOST_NAME = os.environ.get("ELASTIC_HOST_NAME", "localhost")
-ELASTIC_HOST_PORT = os.environ.get("ELASTIC_HOST_PORT", "9200")
-# ELASTIC_URL = os.environ.get('ELASTIC_URL', 'http://localhost:9200')
 
-
-ELASTICSEARCH_DSL = {"default": {"hosts": ELASTIC_HOST_NAME + ":" + ELASTIC_HOST_PORT}}
-
-# Documentation
-SWAGGER_SETTINGS = {
-    "SECURITY_DEFINITIONS": {"Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}},
-    "DEFAULT_FIELD_INSPECTORS": [
-        "drf_yasg.inspectors.CamelCaseJSONFilter",
-        "drf_yasg.inspectors.InlineSerializerInspector",
-        "drf_yasg.inspectors.RelatedFieldInspector",
-        "drf_yasg.inspectors.ChoiceFieldInspector",
-        "drf_yasg.inspectors.FileFieldInspector",
-        "drf_yasg.inspectors.DictFieldInspector",
-        "drf_yasg.inspectors.SimpleFieldInspector",
-        "drf_yasg.inspectors.StringDefaultFieldInspector",
-    ],
-    "USE_SESSION_AUTH": False,
-}
 
 LOGIN_URL = reverse_lazy("accounts:login")
 LOGIN_REDIRECT_URL = "/"
@@ -242,7 +184,6 @@ AUTHENTICATION_BACKENDS = (
     "social_core.backends.facebook.FacebookOAuth2",
     "social_core.backends.linkedin.LinkedinOAuth2",
     "social_core.backends.google.GoogleOAuth2",
-    "graphql_jwt.backends.JSONWebTokenBackend",
     "django.contrib.auth.backends.ModelBackend",
 )
 
@@ -279,19 +220,7 @@ SOCIAL_AUTH_PIPELINE = (
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
-GRAPHENE = {
-    # package path to schema file
-    "SCHEMA": "jobs.schema.schema",
-    # https://docs.graphene-python.org/projects/django/en/latest/introspection/
-    "SCHEMA_INDENT": 4,  # Defaults to None (displays all data on a single line)
-    "MIDDLEWARE": ["graphene_django.debug.DjangoDebugMiddleware", "graphql_jwt.middleware.JSONWebTokenMiddleware"],
-}
 
-GRAPHQL_JWT = {
-    # 'JWT_PAYLOAD_HANDLER': 'jobs.schema.jwt_payload',
-    "JWT_VERIFY_EXPIRATION": True,
-    "JWT_EXPIRATION_DELTA": timedelta(minutes=60),
-}
 
 ENABLE_PROMETHEUS = int(os.environ.get("ENABLE_PROMETHEUS", "0"))
 
