@@ -11,7 +11,8 @@ WORKDIR /app
 # Install system dependencies
 RUN apt-get update \
     && apt-get -y install nano \
-    && apt-get clean
+    && apt-get clean \
+    && apt-get install -y postgresql-client
 
 # Install specific pip version
 RUN python -m pip install --upgrade "pip==23.0.1"
