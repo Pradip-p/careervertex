@@ -7,10 +7,11 @@ from tags.models import Tag
 
 from .manager import JobManager
 
-JOB_TYPE = (("1", "Full time"), ("2", "Part time"), ("3", "Internship"))
+JOB_TYPE = (("1", "Full time"), ("2", "Part time"), ("3", "Internship"), ("4", "Contract"))
 
 
-class Job(models.Model):
+class Job(models.Model):        
+    uuid = models.CharField(max_length=50, null=True, blank=True, unique=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=300)
     description = models.TextField()
@@ -34,6 +35,10 @@ class Job(models.Model):
     class Meta:
         ordering = ["id"]
 
+    # def get_absolute_url(self):
+        # return reverse('job_detail', args=[str(self.created_at.year), str(self.created_at.month), str(self.slug)])
+    
+    
     def get_absolute_url(self):
         return reverse("jobs:jobs-detail", args=[self.id])
 

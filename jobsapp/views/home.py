@@ -17,12 +17,13 @@ class HomeView(ListView):
     context_object_name = "jobs"
 
     def get_queryset(self):
-        return self.model.objects.unfilled()[:20]
+        return self.model.objects.unfilled().order_by('-created_at')[:20]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["trendings"] = self.model.objects.unfilled(created_at__month=timezone.now().month)[:20]
+        context["trendings"] = self.model.objects.unfilled().filter(created_at__month=timezone.now().month).order_by('-created_at')[:20]
         return context
+
 
 
 class SearchView(ListView):
@@ -31,13 +32,10 @@ class SearchView(ListView):
     context_object_name = "jobs"
 
     def get_queryset(self):
-        # q = JobDocument.search().query("match", title=self.request.GET['position']).to_queryset()
-        # print(q)
-        # return q
         return self.model.objects.filter(
             location__contains=self.request.GET.get("location", ""),
             title__contains=self.request.GET.get("position", ""),
-        )
+        ).order_by('-created_at')
 
 
 class JobListView(ListView):
@@ -47,12 +45,13 @@ class JobListView(ListView):
     paginate_by = 40
 
     def get_queryset(self):
-        return self.model.objects.unfilled()
+        return self.model.objects.unfilled().order_by('-created_at')
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         data['total_jobs'] = self.model.objects.unfilled().count()
         return data
+
 
 
 class JobDetailsView(DetailView):
@@ -102,11 +101,6 @@ class ApplyJobView(CreateView):
     def get_success_url(self):
         return reverse_lazy("jobs:jobs-detail", kwargs={"id": self.kwargs["job_id"]})
 
-    # def get_form_kwargs(self):
-    #     kwargs = super(ApplyJobView, self).get_form_kwargs()
-    #     print(kwargs)
-    #     kwargs['job'] = 1
-    #     return kwargs
 
     def form_valid(self, form):
         # check if user already applied
