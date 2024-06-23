@@ -1,6 +1,3 @@
-
-
-```markdown
 # Career Vertex Nepal
 
 ## Overview
@@ -28,16 +25,12 @@ Make sure you have the following installed on your system:
 
 1. **Clone the repository:**
 
-   ```bash
-   git clone https://github.com/yourusername/career-vertex-nepal.git
-   cd career-vertex-nepal
-   ```
+   `git clone git@github.com:Pradip-p/careervertex.git`
+   `cd career-vertex-nepal`
 
 2. **Build and run the Docker containers:**
 
-   ```bash
-   docker-compose up --build
-   ```
+   `docker-compose up --build`
 
 3. **Access the application:**
 
@@ -63,16 +56,12 @@ We’re always open to new ideas. If you have a feature request, please open an 
 
 2. **Clone your fork:**
 
-   ```bash
-   git clone https://github.com/yourusername/career-vertex-nepal.git
-   cd career-vertex-nepal
-   ```
+   `git clone git@github.com:Pradip-p/careervertex.git`
+   `cd career-vertex-nepal`
 
 3. **Create a branch for your feature or bug fix:**
 
-   ```bash
-   git checkout -b feature-or-bugfix-name
-   ```
+   `git checkout -b feature-or-bugfix-name`
 
 4. **Make your changes:**
 
@@ -80,16 +69,13 @@ We’re always open to new ideas. If you have a feature request, please open an 
 
 5. **Commit your changes:**
 
-   ```bash
-   git add .
-   git commit -m "Description of the feature or bug fix"
-   ```
+   `git add . `
+   `git commit -m "Description of the feature or bug fix"`
 
 6. **Push to your fork:**
 
-   ```bash
-   git push origin feature-or-bugfix-name
-   ```
+   
+   `git push origin feature-or-bugfix-name`
 
 7. **Open a Pull Request:**
 
@@ -110,5 +96,3 @@ For any questions or support, please open an issue on the [GitHub issues page](h
 ---
 
 Happy coding!
-```
-
