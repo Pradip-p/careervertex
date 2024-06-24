@@ -3,8 +3,8 @@ from http import HTTPStatus
 from django.test import TestCase
 
 from accounts.models import User
-from jobsapp.forms import CreateJobForm
-from jobsapp.models import Job
+from job.forms import CreateJobForm
+from job.models import Job
 from tags.models import Tag
 
 

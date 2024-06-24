@@ -4,7 +4,7 @@ from django.test import TestCase
 from django.utils import translation
 
 from accounts.models import User
-from jobsapp.models import Applicant, Job
+from job.models import Applicant, Job
 
 
 class BaseTest(TestCase):

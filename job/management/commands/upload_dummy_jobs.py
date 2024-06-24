@@ -2,7 +2,7 @@
 
 from django.core.management.base import BaseCommand
 from django.utils import timezone
-from jobsapp.models import Job, Tag, User
+from job.models import Job, Tag, User
 from django.contrib.auth.hashers import make_password
 import random
 import faker

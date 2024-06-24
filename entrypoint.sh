@@ -5,7 +5,7 @@
 
 # Collect static files
 python manage.py collectstatic --noinput
-python manage.py makemigrations jobsapp  accounts oauth2_provider
+python manage.py makemigrations job  accounts oauth2_provider
 python manage.py migrate
 
 # Check if DEBUG is set to 1, then run the development server

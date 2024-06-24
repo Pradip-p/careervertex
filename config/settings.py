@@ -25,7 +25,7 @@ INSTALLED_APPS = [
     "django.contrib.flatpages",
     "django.contrib.staticfiles",
     "django.contrib.sitemaps",
-    "jobsapp",
+    "job",
     "accounts",
     "oauth2_provider",
     "social_django",

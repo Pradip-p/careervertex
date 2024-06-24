@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from jobsapp.models import Job
+from job.models import Job
 
 
 class TestHomeView(TestCase):

@@ -12,7 +12,7 @@ from config.sitemaps import Sitemaps, StaticViewSitemap
 
 
 
-lang_patterns = i18n_patterns(path("", include("jobsapp.urls")),
+lang_patterns = i18n_patterns(path("", include("job.urls")),
                               path("", include("accounts.urls")),
                               )
 

@@ -6,8 +6,8 @@ from django.views.generic import ListView, UpdateView
 
 from accounts.forms import EmployeeProfileUpdateForm
 from accounts.models import User
-from jobsapp.decorators import user_is_employee
-from jobsapp.models import Applicant, Favorite
+from job.decorators import user_is_employee
+from job.models import Applicant, Favorite
 
 
 @method_decorator(login_required(login_url=reverse_lazy("accounts:login")), name="dispatch")
