@@ -28,7 +28,7 @@ services:
       - media_volume:/usr/src/app/mediafiles
     depends_on:
       - db
-    command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn jobs.wsgi:application --bind 0.0.0.0:8000"
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn config.wsgi:application --bind 0.0.0.0:8000"
 
   nginx:
     build: ./deployment/nginx/

@@ -7,9 +7,8 @@ from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
 from django.conf.urls.static import static
 from django.views.decorators.csrf import csrf_exempt
-from graphene_file_upload.django import FileUploadGraphQLView
 
-from jobs.sitemaps import Sitemaps, StaticViewSitemap
+from config.sitemaps import Sitemaps, StaticViewSitemap
 
 
 
@@ -22,7 +21,6 @@ urlpatterns = lang_patterns + [
     path("admin/", admin.site.urls),
     path("social-auth/", include("social_django.urls", namespace="social")),
     path("sitemap.xml/", sitemap, {"sitemaps": dict(Sitemaps())}, name="django.contrib.sitemaps.views.sitemap"),
-    path("graphql/", csrf_exempt(FileUploadGraphQLView.as_view(graphiql=True))),
 ]
 
 if settings.ENABLE_PROMETHEUS:

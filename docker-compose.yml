@@ -32,7 +32,6 @@ services:
     depends_on:
       - db
     working_dir: /app
-    #command: ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && gunicorn jobs.wsgi:application --bind 0.0.0.0:8000"]
 
 volumes:
   static_volume:
