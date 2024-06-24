@@ -7,9 +7,9 @@ from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 from accounts.forms import EmployerProfileUpdateForm
-from jobsapp.decorators import user_is_employer
-from jobsapp.forms import CreateJobForm
-from jobsapp.models import Applicant, Job, Tag
+from job.decorators import user_is_employer
+from job.forms import CreateJobForm
+from job.models import Applicant, Job, Tag
 
 
 class DashboardView(ListView):

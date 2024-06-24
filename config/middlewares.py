@@ -1,7 +1,7 @@
 from django.utils.deprecation import MiddlewareMixin
 from django.utils.timezone import now
 
-from jobsapp.metrics import requests_total, last_user_activity_time
+from job.metrics import requests_total, last_user_activity_time
 
 
 class CustomMiddleware(MiddlewareMixin):

@@ -3,11 +3,11 @@ import hashlib
 import os
 import django
 from django.core.files.base import ContentFile
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "jobs.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # settings.configure()
 django.setup()
-from jobsapp.models import Job, Tag
+from job.models import Job, Tag
 from accounts.models import User
 from datetime import datetime
 from dateutil import parser
